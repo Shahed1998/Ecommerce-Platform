@@ -1,2 +1,2 @@
 # Ecommerce-Platform
-
+Our project is basically a goods selling and buying webapp. Here vendor can show their products for selling and customer can buy from them by seeing the product and reviews. Our system will have delivery staff to give home delivery to the customer the nearest available delivery staff will deliver the product. Customer will have online payment feature. All users will have data visualization where they can see their analyzed data visually. Also there will be admins to maintain the whole system properly.
