@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Login;
+use App\Http\Controllers\customer\dashboardController;
+use App\Http\Controllers\customer\registrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +17,15 @@ use App\Http\Controllers\Login;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->name('home');
 
 // Login routes
 Route::get('/login', [Login::class, 'loginGet'])->name('login');
+
+// Customer routes
+Route::get('/customer/dashboard', [dashboardController::class, 'getDashboard'])->name('customerDashboard');
+
+// Registration
+Route::get('/registration', [registrationController::class, 'getRegister'])->name('register');
+
