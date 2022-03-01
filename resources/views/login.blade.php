@@ -1,12 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <h2>Ecommerce Platform</h2>
 </head>
 <body>
-    <h1>Login Page</h1>
+    <hr>
+    <form action="{{route('login.submit')}}" method="post">
+    {{@csrf_field()}}
+    <div class="box1">
+        <h3>Login</h3>
+        <div class="lg"><input type="text" name="email" placeholder="Email" value="{{old('email')}}"></div>
+        <div class="lg"><input type="password" name="password" placeholder="Password" ></div>
+        <button class="button1" type="submit">Login</button>
+        @if(Session::get('msg'))
+        <span style="color:red">{{Session::get('msg')}}<span>
+        @endif
+    </div>
+    <br><br><br>
+    <h4 style="text-align:center">Copyright &copy Ecommerce Platform</h4>
 </body>
 </html>
