@@ -30,7 +30,7 @@ Route::get('/customer/dashboard', [dashboardController::class, 'getDashboard'])-
 
 // Registration
 Route::get('/registration', [registrationController::class, 'getRegister'])->name('register');
-Route::post('/registration', [registrationController::class, 'postRegister']);
+Route::post('/registration', [registrationController::class, 'postRegister'])->middleware('XSSsanitizer');
 
 // Admin routes
 Route::get('admin/home', [AdminController::class, 'home'])->name('admin.home');

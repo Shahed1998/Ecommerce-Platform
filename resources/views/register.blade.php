@@ -4,6 +4,16 @@
         {{@csrf_field()}}
         <table>
             <tr>
+                <td>Register as:</td>
+                <td>
+                    <select name="register_as" id="">
+                        <option value="1" selected>Customer</option>
+                        <option value="3">Delivery stuff</option>
+                        <option value="4">Vendor</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td>Username:</td>
                 <td><input type="text" name="uname" id="" value="{{old('uname')}}"></td>
                 <td>
@@ -77,6 +87,10 @@
                 </td>
             </tr>
             <tr>
+                <td>Date of birth:</td>
+                <td><input type="date" name="dob" id="" value="{{date('Y-m-d')}}"></td>
+            </tr>
+            <tr>
                 <td>Contact number:</td>
                 <td>
                     <select name="country_code" id="">
@@ -85,7 +99,7 @@
                         <option value="+92">+92</option>
                         <option value="+86">+86</option>
                     </select>
-                    <input type="text" name="contact" id="" value="{{old('contact')}}">
+                    <input type="text" name="contact" id="" value="{{old('contact')}}" size="15">
                 </td>
                 <td>
                     <span class="err" style="color:red;">

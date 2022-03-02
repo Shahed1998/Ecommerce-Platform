@@ -4,12 +4,14 @@ namespace App\Http\Controllers\customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\UserCredential;
+use App\Models\UserInfo;
 
 class registrationController extends Controller
 {
     // Validator function
     private function form_validator($req){
-        $validated_data = $this->validate($req, [
+        $this->validate($req, [
             "uname"=>"required|min:5",
             "email"=>"required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",
             "password"=>"required|min:8",
@@ -37,7 +39,6 @@ class registrationController extends Controller
             "customer_image.mimes"=>"Incorrect image format"
         ]);
 
-        return $validated_data;
     }
 
     //get registration page
@@ -48,7 +49,34 @@ class registrationController extends Controller
     // post registration page
     public function postRegister(Request $req){
 
-        $this->form_validator($req);
+        // return $req;
+        
+        $validated_data = $this->form_validator($req);
+
+        // Saves the data in the user_credentials table
+        $user_credentials = new UserCredential();
+        $user_credentials->email = $req->email;
+        $user_credentials->password = bcrypt($req->password);
+        $user_credentials->user_status = 2;
+        $user_credentials->user_role = $req->register_as;
+
+        if($user_credentials->save()){
+
+            $uc_id = $user_credentials->id;  
+
+            // Save the user info on the user_info table
+            $user_info = new UserInfo();
+            $user_info->name = $req->uname;
+            $user_info->gender = $req->gender;
+            $user_info->dob = $req->dob;
+            $user_info->contact_no = "$req->country_code"."$req->contact";
+            $user_info->present_address = $req->present_address;
+            $user_info->permanent_address = $req->permanent_address;
+            $user_info->uc_id = $uc_id;
+            $user_info->save();  
+        }
+        
+        return back();
         
     }
 }
