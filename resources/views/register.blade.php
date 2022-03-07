@@ -1,5 +1,10 @@
 @extends('layouts.home')
 @section('content')
+    <div id="registration_status_message">
+        <span style="color:red">
+            {{Session::get('registration_status')}}
+        </span>
+    </div>
     <form action="" method="post" enctype="multipart/form-data">
         {{@csrf_field()}}
         <table>
