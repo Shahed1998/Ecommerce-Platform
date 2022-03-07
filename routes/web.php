@@ -2,9 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Login;
-use App\Http\Controllers\customer\dashboardController;
 use App\Http\Controllers\customer\registrationController;
-use App\Http\Controllers\admin\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,13 +24,10 @@ Route::get('/', function () {
 Route::get('/login', [Login::class, 'loginGet'])->name('login');
 Route::post('/login', [Login::class, 'loginPost'])->name('login.submit');
 
-// Customer routes
-Route::get('/customer/dashboard', [dashboardController::class, 'getDashboard'])->name('customerDashboard');
 
 // Registration
 Route::get('/registration', [registrationController::class, 'getRegister'])->name('register');
 Route::post('/registration', [registrationController::class, 'postRegister'])->middleware('XSSsanitizer');
 
-// Admin routes
-Route::get('admin/home', [AdminController::class, 'home'])->name('admin.home');
+
 
