@@ -15,4 +15,5 @@ use App\Http\Controllers\admin\AdminController;
 */
 
 // Admin routes
-Route::get('/home', [AdminController::class, 'home'])->name('admin.home');
+Route::get('dashboard', [AdminController::class, 'home'])->name('admin.home');
+Route::get('customer/pendings', [AdminController::class, 'CustomerPending'])->name('admin.customer.pending');

@@ -30,4 +30,3 @@ Route::get('/registration', [registrationController::class, 'getRegister'])->nam
 Route::post('/registration', [registrationController::class, 'postRegister'])->middleware('XSSsanitizer');
 
 
-
