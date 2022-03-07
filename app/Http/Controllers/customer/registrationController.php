@@ -77,7 +77,7 @@ class registrationController extends Controller
             $user_info->gender = $req->gender;
             $user_info->dob = $req->dob;
             $user_info->contact_no = "$req->country_code"."$req->contact";
-            $user_info->image = $image_path;
+            $user_info->image = "storage/images/".$image_name;
             $user_info->present_address = $req->present_address;
             $user_info->permanent_address = $req->permanent_address;
             $user_info->uc_id = $uc_id;
