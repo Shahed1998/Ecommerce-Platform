@@ -29,7 +29,10 @@ class Login extends Controller
 
         if($user->user_role==1)//customer
         {
-            
+            $req->session()->put('email',$req->email);
+            $req->session()->put('uc_id',$user->id);
+            $req->session()->put('user_role',$user->user_role);
+            return redirect()->route('customerDashboard');
         }
 
         if($user->user_role==2)//admin

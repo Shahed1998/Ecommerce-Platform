@@ -33,5 +33,6 @@ Route::get('/registration', [registrationController::class, 'getRegister'])->nam
 Route::post('/registration', [registrationController::class, 'postRegister'])->middleware('XSSsanitizer');
 
 // Admin routes
-Route::get('admin/home', [AdminController::class, 'home'])->name('admin.home');
+Route::get('admin/dashboard', [AdminController::class, 'home'])->name('admin.home');
+Route::get('admin/customer/pendings', [AdminController::class, 'CustomerPending'])->name('admin.customer.pending');
 
