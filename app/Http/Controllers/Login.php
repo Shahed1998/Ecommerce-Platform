@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin\UserCredential;
+use Illuminate\Support\Facades\Hash;
 
 class Login extends Controller
 {
@@ -13,20 +14,25 @@ class Login extends Controller
     }
     //post login page
     public function loginPost(Request $req){
-        $user =UserCredential::where('email',$req->email)
-        ->where('password',$req->password)
-        ->first();
-        if(!$user)//Checking if there is a user with given email and password
+        // Refactored login validation
+        // 1) Gets user data using email 
+        // 2) matches hash bcrypt
+        $user = UserCredential::where('email',$req->email)->first();
+        
+        
+        if(!$user || !Hash::check($req->password, $user->password)) //Checking if there is a user with given email and password
         {
             $req->session()->flash('msg','Invalid email or password');
             return redirect()->route('login');
         }
+
         if($user->user_status!=1)//checking if user is active or not
         {
             $req->session()->flash('msg','User is not active!');
             return redirect()->route('login');
         }
 
+        
         if($user->user_role==1)//customer
         {
             $req->session()->put('email',$req->email);
