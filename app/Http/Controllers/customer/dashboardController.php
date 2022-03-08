@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class dashboardController extends Controller
 {
     //customer dashboard get
-    public function getDashboard(){
+    public function getDashboard(Request $req){
+        // return $req->session()->get('uc_id');
         return view("customer.dashboard");
     }
 }
