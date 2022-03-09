@@ -8,6 +8,10 @@ use App\Models\UserInfo;
 
 class dashboardController extends Controller
 {
+    public function __construct(){
+        $this->middleware('sessionChecker');
+    }
+    
     //customer dashboard get
     public function getDashboard(Request $req){
         $uc_id = $req->session()->get('uc_id');
@@ -17,5 +21,9 @@ class dashboardController extends Controller
         // return $info;
 
         return view("customer.dashboard")->with('info', $user_info);
+    }
+
+    public function getEdit(){
+        return view('customer.edit');
     }
 }

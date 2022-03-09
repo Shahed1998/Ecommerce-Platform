@@ -16,5 +16,6 @@ use App\Http\Controllers\customer\dashboardController;
 
 // Customer routes
 Route::get('/dashboard', [dashboardController::class, 'getDashboard'])->name('customerDashboard');
+Route::get('/edit', [dashboardController::class, 'getEdit'])->name('customerEdit');
 
 
