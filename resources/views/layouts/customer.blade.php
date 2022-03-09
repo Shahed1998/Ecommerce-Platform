@@ -21,7 +21,7 @@
             <a href=""><i class="fa-solid fa-circle-right"></i> View shop</a>
             <a href=""><i class="fa-solid fa-circle-right"></i> View cart</a>
             <a href=""><i class="fa-solid fa-circle-right"></i> View orders</a>
-            <a href=""><i class="fa-solid fa-circle-left"></i> Logout</a>
+            <a href="{{route('logout')}}"><i class="fa-solid fa-circle-left"></i> Logout</a>
             </div>
         </div>
         <div class="right-bar">

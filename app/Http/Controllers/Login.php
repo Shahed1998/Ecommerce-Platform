@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Hash;
 
 class Login extends Controller
 {
+    public function __construct(){
+        $this->middleware('authUser');
+    }
     //get login page
     public function loginGet(){
         return view('login');
