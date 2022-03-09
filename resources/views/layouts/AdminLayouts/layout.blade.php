@@ -8,9 +8,41 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"> <!-- for fontawesome -->
     </head>
     <body>
-        <div class="mt-4 ml-4 mb-4">
-            <a  href="{{route('admin.home')}}"><h3>Ecommmerce Platform</h3></a>
-        </div>
+
+
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-2">
+            <div class="container">
+            <a href="{{route('admin.home')}}" class="navbar-brand">Ecommerce Platform</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown mr-3">
+                    <a href="#" class="nav-link">
+                    <i class="fas fa-user"></i> &nbsp Mobarak
+                    </a>
+                    <div class="dropdown-menu mt-2 ml-3 bg-light">
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-user-circle"></i> Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('logout')}}" class="nav-link">
+                    <i class="fas fa-user-times"></i>&nbsp Logout
+                    </a>
+                </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
+    </header>
+    <br><br>
+
+
+       
         @include('Admin.Headers.header')
         <main id="main ">
             <div class="">
