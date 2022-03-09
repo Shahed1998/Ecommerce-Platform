@@ -16,6 +16,9 @@ use App\Http\Controllers\customer\dashboardController;
 
 // Customer routes
 Route::get('/dashboard', [dashboardController::class, 'getDashboard'])->name('customerDashboard');
-Route::get('/edit', [dashboardController::class, 'getEdit'])->name('customerEdit');
+Route::get('/info', [dashboardController::class, 'getEdit'])->name('customerEdit');
+Route::get('/info/update', [dashboardController::class, 'updateGet'])->name('customer.update');
+Route::patch('/info/update', [dashboardController::class, 'updatePatch'])->middleware('XSSsanitizer');
+
 
 
