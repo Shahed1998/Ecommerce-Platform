@@ -9,6 +9,14 @@ use App\Models\Admin\UserCredential;
 class AdminController extends Controller
 {
     //
+    public function __construct(){
+        $this->middleware(['sessionChecker','authAdmin']);
+    }
+
+    // public function __construct(){
+    //     $this->middleware('sessionChecker');
+    // }
+
     public function home()
     {
         $customers=UserCredential::where('user_status',2)

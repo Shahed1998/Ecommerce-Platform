@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class SessionChecker
+class AdminSessionChecker
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,14 @@ class SessionChecker
      */
     public function handle(Request $request, Closure $next)
     {
-        if(! $request->session()->has('uc_id')){
-            return redirect()->route('login');
-        }
-        return $next($request);
+        $user_role=$request->session()->get('user_role');
+        if($user_role==1)//Customer
+            return redirect()->route('customerDashboard');
+        if($user_role==2)//Admin
+            return $next($request);
+        else if($user_role==3)
+            return redirect()->route('staffDashboard');
+        else if($use_role==4)
+            return redirect()->route('vendorDashboard');
     }
 }

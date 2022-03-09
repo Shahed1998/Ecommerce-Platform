@@ -57,6 +57,10 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'sessionChecker' => \App\Http\Middleware\SessionChecker::class,
         'authUser' => \App\Http\Middleware\auth::class,
+        'authCustomer' => \App\Http\Middleware\CustomerSessionChecker::class,
+        'authAdmin' => \App\Http\Middleware\AdminSessionChecker::class,
+        'authStaff' => \App\Http\Middleware\StaffSessionChecker::class,
+        'authVendor' => \App\Http\Middleware\VendorSessionChecker::class,
         'XSSsanitizer' => \App\Http\Middleware\XSSsanitization::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

@@ -9,7 +9,7 @@ use App\Models\UserInfo;
 class dashboardController extends Controller
 {
     public function __construct(){
-        $this->middleware('sessionChecker');
+        $this->middleware(['sessionChecker','authCustomer']);
     }
     
     //customer dashboard get
