@@ -1,6 +1,7 @@
 @extends('layouts.customer')
 @section('content')
-    <section class="inner-content">
+    <section class="inner-content-dashboard">
+        <div class="inner-content">
         <section class="profile-pic">
             <img src="{{asset($info->image)}}" class="profile-img" alt="Profile picture">
         </section>
@@ -43,5 +44,6 @@
                 <td><textarea disabled name="permanent_address" id="" cols="25" rows="5">{{$info->permanent_address}}</textarea></td>
             </tr>
         </table>
+        </div>
     </section>
 @endsection

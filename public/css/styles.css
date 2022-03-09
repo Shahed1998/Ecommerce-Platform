@@ -7,20 +7,40 @@
     font-family: "Poppins", sans-serif;
 }
 
+#content {
+    margin-top: 5rem;
+}
+
 .left-bar,
 .right-bar {
-    width: 50%;
     height: 90vh;
     float: left;
+}
+
+.left-bar {
+    width: 30%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* .left-bar .inner */
+.right-bar {
+    width: 70%;
+    overflow-y: scroll;
+    font-size: 120%;
+}
+
+/* .right-bar .inner-content {
+    margin-top: 1rem;
+} */
+
+.right-bar .inner-content-dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .profile-pic {
-    margin-top: 1rem;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -36,21 +56,24 @@
     color: #000;
 }
 
-.right-bar {
-    font-size: 120%;
-}
-
 .left-bar a:hover {
     font-size: 130%;
     color: #ff0000;
 }
 
 .profile-img {
+    margin-top: 5rem;
     width: 100px;
     border-radius: 50px;
     border: 1px solid #000;
 }
 
-#footer {
-    text-align: center;
+.footer {
+    position: fixed;
+    width: 100%;
+    margin-top: 90vh;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
