@@ -24,8 +24,8 @@ class UserCredential extends Model
         return $this->belongsTo(User::class,'user_role');
     }
 
-    public function user_infos()
+    public function user_info()
     {
-        return $this->hasMany(User_Info::class,'uc_id');
+        return $this->hasOne(User_Info::class,'uc_id');
     }
 }
