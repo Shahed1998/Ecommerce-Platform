@@ -12,8 +12,6 @@
             <a  href="{{route('admin.home')}}"><h3>Ecommmerce Platform</h3></a>
         </div>
         @include('Admin.Headers.header')
-
-
         <main id="main ">
             <div class="">
                 <div class="row justify-content-around">
@@ -26,7 +24,7 @@
                         </div>
                         <div class="text-left mt-2">
                             <h4>Delivery Staffs</h4>
-                            <a href="#" class="btn btn-outline-dark btn-sm mb-2">Pending</a>
+                            <a href="{{route('admin.DeliveryStaff.pending')}}" class="btn btn-outline-dark btn-sm mb-2">Pending</a>
                             <a href="#" class="btn btn-outline-dark btn-sm mb-2">Active</a>
                             <a href="#" class="btn btn-outline-dark btn-sm mb-2">Blocked</a>
                         </div>
