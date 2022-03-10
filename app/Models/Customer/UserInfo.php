@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Customer;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\UserCredential;
+use App\Models\Customer\UserCredential;
 
-class UserRole extends Model
+class UserInfo extends Model
 {
     use HasFactory;
-    protected $table = "users";
+
+    protected $table = "user_info";
     public $timestamps = false;
 
     public function userCredential(){
-        return $this->hasMany(UserCredential::class, 'user_role');
+        return $this->belongsTo(UserCredential::class, 'uc_id');
     }
 }
