@@ -52,19 +52,19 @@
                             <h4>Customers</h4>
                             <a href="{{route('admin.customer.pending')}}" class="btn btn-outline-dark btn-sm mb-2">Pending</a> 
                             <a href="{{route('admin.customer.active')}}" class="btn btn-outline-dark btn-sm mb-2">Active</a> 
-                            <a href="#" class="btn btn-outline-dark btn-sm mb-2">Blocked</a> 
+                            <a href="{{route('admin.customer.blocked')}}" class="btn btn-outline-dark btn-sm mb-2">Blocked</a> 
                         </div>
                         <div class="text-left mt-2">
                             <h4>Delivery Staffs</h4>
                             <a href="{{route('admin.DeliveryStaff.pending')}}" class="btn btn-outline-dark btn-sm mb-2">Pending</a>
-                            <a href="#" class="btn btn-outline-dark btn-sm mb-2">Active</a>
-                            <a href="#" class="btn btn-outline-dark btn-sm mb-2">Blocked</a>
+                            <a href="{{route('admin.DeliveryStaff.active')}}" class="btn btn-outline-dark btn-sm mb-2">Active</a>
+                            <a href="{{route('admin.DeliveryStaff.blocked')}}" class="btn btn-outline-dark btn-sm mb-2">Blocked</a>
                         </div>
                         <div class="text-left mt-2">
                             <h4>Vendors</h4>
                             <a href="{{route('admin.Vendor.pending')}}" class="btn btn-outline-dark btn-sm mb-2">Pending</a>
-                            <a href="#" class="btn btn-outline-dark btn-sm mb-2">Active</a>
-                            <a href="#" class="btn btn-outline-dark btn-sm mb-2">Blocked</a>
+                            <a href="{{route('admin.Vendor.active')}}" class="btn btn-outline-dark btn-sm mb-2">Active</a>
+                            <a href="{{route('admin.Vendor.blocked')}}" class="btn btn-outline-dark btn-sm mb-2">Blocked</a>
                         </div>
                         <div class="text-left mt-2">
                             <h4>Others</h4>

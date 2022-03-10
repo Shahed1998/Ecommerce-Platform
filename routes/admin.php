@@ -33,16 +33,45 @@ Route::get('customer/actives', [CustomerController::class, 'CustomerActive'])->n
 Route::post('customer/actives', [CustomerController::class, 'CustomerActivePost'])->name('admin.customer.active.Post');
 Route::get('customer/actives/ChangeAccsess/{id?}', [CustomerController::class, 'CustomerActiveChangeAccess'])->name('admin.customer.active.changeAcssess');
 Route::post('customer/actives/ChangeAccsess/{id?}', [CustomerController::class, 'CustomerActiveChangeAccessPost'])->name('admin.customer.active.changeAcssess.post');
+//Blocked
+Route::get('customer/blocked', [CustomerController::class, 'CustomerBlocked'])->name('admin.customer.blocked');
+Route::post('customer/blocked', [CustomerController::class, 'CustomerBlockedPost'])->name('admin.customer.blocked.Post');
+Route::get('customer/blocked/ChangeAccsess/{id?}', [CustomerController::class, 'CustomerBlockedChangeAccess'])->name('admin.customer.blocked.changeAcssess');
+Route::post('customer/blocked/ChangeAccsess/{id?}', [CustomerController::class, 'CustomerBlockedChangeAccessPost'])->name('admin.customer.blocked.changeAcssess.post');
 
 //DeliveryStaff
+//pending
 Route::get('DeliveryStaff/pendings', [DeliveryStaffController::class, 'DeliveryStaffPending'])->name('admin.DeliveryStaff.pending');
 Route::post('DeliveryStaff/pendings', [DeliveryStaffController::class, 'DeliveryStaffPendingPost'])->name('admin.DeliveryStaff.pending.Post');
 Route::get('DeliveryStaff/pendings/ChangeAccsess/{id?}', [DeliveryStaffController::class, 'DeliveryStaffPendingChangeAccess'])->name('admin.DeliveryStaff.pending.changeAcssess');
 Route::post('DeliveryStaff/pendings/ChangeAccsess/{id?}', [DeliveryStaffController::class, 'DeliveryStaffPendingChangeAccessPost'])->name('admin.DeliveryStaff.pending.changeAcssess.post');
+//Active
+Route::get('DeliveryStaff/actives', [DeliveryStaffController::class, 'DeliveryStaffActive'])->name('admin.DeliveryStaff.active');
+Route::post('DeliveryStaff/actives', [DeliveryStaffController::class, 'DeliveryStaffActivePost'])->name('admin.DeliveryStaff.active.Post');
+Route::get('DeliveryStaff/actives/ChangeAccsess/{id?}', [DeliveryStaffController::class, 'DeliveryStaffActiveChangeAccess'])->name('admin.DeliveryStaff.active.changeAcssess');
+Route::post('DeliveryStaff/actives/ChangeAccsess/{id?}', [DeliveryStaffController::class, 'DeliveryStaffActiveChangeAccessPost'])->name('admin.DeliveryStaff.active.changeAcssess.post');
 
+//Blocked
+Route::get('DeliveryStaff/blocked', [DeliveryStaffController::class, 'DeliveryStaffBlocked'])->name('admin.DeliveryStaff.blocked');
+Route::post('DeliveryStaff/blocked', [DeliveryStaffController::class, 'DeliveryStaffBlockedPost'])->name('admin.DeliveryStaff.blocked.Post');
+Route::get('DeliveryStaff/blocked/ChangeAccsess/{id?}', [DeliveryStaffController::class, 'DeliveryStaffBlockedChangeAccess'])->name('admin.DeliveryStaff.blocked.changeAcssess');
+Route::post('DeliveryStaff/blocked/ChangeAccsess/{id?}', [DeliveryStaffController::class, 'DeliveryStaffBlockedChangeAccessPost'])->name('admin.DeliveryStaff.blocked.changeAcssess.post');
 
 //vendors
+//pending
 Route::get('Vendor/pendings', [VendorController::class, 'VendorPending'])->name('admin.Vendor.pending');
 Route::post('Vendor/pendings', [VendorController::class, 'VendorPendingPost'])->name('admin.Vendor.pending.Post');
 Route::get('Vendor/pendings/ChangeAccsess/{id?}', [VendorController::class, 'VendorPendingChangeAccess'])->name('admin.Vendor.pending.changeAcssess');
 Route::post('Vendor/pendings/ChangeAccsess/{id?}', [VendorController::class, 'VendorPendingChangeAccessPost'])->name('admin.Vendor.pending.changeAcssess.post');
+
+//Active
+Route::get('Vendor/actives', [VendorController::class, 'VendorActive'])->name('admin.Vendor.active');
+Route::post('Vendor/actives', [VendorController::class, 'VendorActivePost'])->name('admin.Vendor.active.Post');
+Route::get('Vendor/actives/ChangeAccsess/{id?}', [VendorController::class, 'VendorActiveChangeAccess'])->name('admin.Vendor.active.changeAcssess');
+Route::post('Vendor/actives/ChangeAccsess/{id?}', [VendorController::class, 'VendorActiveChangeAccessPost'])->name('admin.Vendor.active.changeAcssess.post');
+
+//Blocked
+Route::get('Vendor/blocked', [VendorController::class, 'VendorBlocked'])->name('admin.Vendor.blocked');
+Route::post('Vendor/blocked', [VendorController::class, 'VendorBlockedPost'])->name('admin.Vendor.blocked.Post');
+Route::get('Vendor/blocked/ChangeAccsess/{id?}', [VendorController::class, 'VendorBlockedChangeAccess'])->name('admin.Vendor.blocked.changeAcssess');
+Route::post('Vendor/blocked/ChangeAccsess/{id?}', [VendorController::class, 'VendorBlockedChangeAccessPost'])->name('admin.Vendor.blocked.changeAcssess.post');
