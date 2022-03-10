@@ -1,5 +1,18 @@
 @extends('layouts.customer')
 @section('content')
+    @if(Session::has('update_status')) 
+        @if(Session::get('update_status') == true)
+            <span style="display:block; color:#fff;
+             width:100%; background-color:green; text-align:center; margin-bottom:5px;">
+                User updated successfully
+            </span>
+        @else
+            <span style="display:block; color:#fff;
+             width:100%; background-color:red; text-align:center; margin-bottom:5px;">
+                Unable to update user, invalid old password or email
+            </span>
+        @endif
+    @endif
     <div class="inner-content">
         <div id="registration_status_message">
         <span style="color:red">
@@ -13,28 +26,28 @@
                 <tr>
                     <td>Username:</td>
                     <td><input type="text" name="uname" id="" value="{{$user_info->name}}"></td>
-                    <!-- <td>
+                    <td>
                         <span class="err" style="color:red;">
                             @error("uname")
                                 {{$message}}
                             @enderror
                         </span>
-                    </td> -->
+                    </td>
                 </tr>
                 <tr>
                     <td>Email:</td>
                     <td><input type="text" name="email" id="" value="{{$user_info->userCredential->email}}"></td>
-                    <!-- <td>
+                    <td>
                         <span class="err" style="color:red;">
                             @error("email")
                                 {{$message}}
                             @enderror
                         </span>
-                    </td> -->
+                    </td>
                 </tr>
                 <tr>
                     <td>Old password:</td>
-                    <td><input type="password" name="prev-password" id=""></td>
+                    <td><input type="password" name="prev-password" id="" placeholder="Required"></td>
                     <td>
                         <span class="err" style="color:red;">
                             @error("prev-password")
@@ -47,24 +60,24 @@
                 <tr>
                     <td>New Password:</td>
                     <td><input type="password" name="password" id=""></td>
-                    <!-- <td>
+                    <td>
                         <span class="err" style="color:red;">
                             @error("password")
                                 {{$message}}
                             @enderror
                         </span>
-                    </td> -->
+                    </td>
                 </tr>
                 <tr>
                     <td>Confirm new password:</td>
                     <td><input type="password" name="c_password" id=""></td>
-                    <!-- <td>
+                    <td>
                         <span class="err" style="color:red;">
                             @error("c_password")
                                 {{$message}}
                             @enderror
                         </span>
-                    </td> -->
+                    </td>
                 </tr>
                 <tr>
                     <td>Gender:</td>

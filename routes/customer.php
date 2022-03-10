@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\customer\dashboardController;
+use App\Http\Controllers\customer\edit;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,8 @@ use App\Http\Controllers\customer\dashboardController;
 // Customer routes
 Route::get('/dashboard', [dashboardController::class, 'getDashboard'])->name('customerDashboard');
 Route::get('/info', [dashboardController::class, 'getEdit'])->name('customerEdit');
-Route::get('/info/update', [dashboardController::class, 'updateGet'])->name('customer.update');
-Route::patch('/info/update', [dashboardController::class, 'updatePatch'])->middleware('XSSsanitizer');
+Route::get('/info/update', [edit::class, 'updateGet'])->name('customer.update');
+Route::patch('/info/update', [edit::class, 'updatePatch'])->middleware('XSSsanitizer');
 
 
 
