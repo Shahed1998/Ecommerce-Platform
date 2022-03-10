@@ -69,7 +69,7 @@
                         <div class="text-left mt-2">
                             <h4>Others</h4>
                             <a href="#" class="btn btn-outline-dark btn-sm mb-2">Register an Admin</a> <br>
-                            <a href="#" class="btn btn-outline-dark btn-sm mb-2">Activities</a> <br>
+                            <a href="{{route('admin.activites')}}" class="btn btn-outline-dark btn-sm mb-2">Activities</a> <br>
                         </div>
                     </div>
                 @yield('content')

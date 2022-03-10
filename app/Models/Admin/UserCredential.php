@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Admin\User_Status;
 use App\Models\Admin\User;
 use App\Models\Admin\User_Info;
+use App\Models\Admin\AdminHistory;
 
 class UserCredential extends Model
 {
@@ -27,5 +28,9 @@ class UserCredential extends Model
     public function user_info()
     {
         return $this->hasOne(User_Info::class,'uc_id');
+    }
+
+    public function Histories(){
+        return $this->hasMany(AdminHistory::class, 'admin_id');
     }
 }

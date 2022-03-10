@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\UserCredential;
+use App\Models\Admin\AdminHistory;
+use DateTime;
 
 class AdminController extends Controller
 {
@@ -12,11 +14,6 @@ class AdminController extends Controller
     public function __construct(){
         $this->middleware('sessionChecker');
     }
-
-    // public function __construct(){
-    //     $this->middleware('sessionChecker');
-    // }
-
     public function home()
     {
         $customers=UserCredential::where('user_status',2)
@@ -33,6 +30,7 @@ class AdminController extends Controller
         ->with('v',count($vendors))
         ->with('t',count($customers)+count($dstaffs)+count($vendors));
     }
+
     public function CustomerPending()
     {
         $customers=UserCredential::where('user_status',2)
@@ -62,6 +60,15 @@ class AdminController extends Controller
         ->first();
         return view('Admin.CustomerPendingChangeAccess')->with('customer',$customer);
     }
+    public function SaveHistory($str)
+    {
+        $history=new AdminHistory();
+        $history->description=$str;
+        $history->admin_id=session()->get('uc_id');
+        $dt = new DateTime();
+        $history->date_time=$dt->format('Y-m-d H:i:s');
+        $history->save();
+    }
 
     public function CustomerPendingChangeAccessPost(Request $req)
     {
@@ -76,12 +83,16 @@ class AdminController extends Controller
             {
                 $customer->user_status=1;
                 $customer->save();
+                $str="Customer's pending registration request accpeted with id ".$id;
+                $this->SaveHistory($str);
                 $req->session()->flash('msg1','Customer successfully being accepted');
             }
             else
             {
                 $customer->user_status=4;
                 $customer->save();
+                $str="Customer's pending registration request rejected with id ".$id;
+                $this->SaveHistory($str);
                 $req->session()->flash('msg1','Customer successfully being rejected');
             }
         }
@@ -136,12 +147,16 @@ class AdminController extends Controller
             {
                 $DeliverySatff->user_status=1;
                 $DeliverySatff->save();
+                $str="Delivery Staff's pending registration request accpeted with id ".$id;
+                $this->SaveHistory($str);
                 $req->session()->flash('msg1','Delivery Staff successfully being accepted');
             }
             else
             {
                 $DeliverySatff->user_status=4;
                 $DeliverySatff->save();
+                $str="Delivery Staff's pending registration request rejected with id ".$id;
+                $this->SaveHistory($str);
                 $req->session()->flash('msg1','Delivery Staff successfully being rejected');
             }
         }
@@ -150,5 +165,13 @@ class AdminController extends Controller
             $req->session()->flash('msg2','Error in the operation');
         }
         return view('Admin.DeliveryStaffPendingChangeAccess')->with('DeliveryStaff',$DeliverySatff);
+    }
+
+    public function AdminActivities()
+    {
+        $activites=UserCredential::where('id',session()->get('uc_id'))
+        ->first();
+        //return $activites->Histories;
+        return view('Admin.activities')->with('activities',$activites->Histories);
     }
 }
