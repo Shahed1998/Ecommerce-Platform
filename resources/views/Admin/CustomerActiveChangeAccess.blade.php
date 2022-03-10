@@ -3,7 +3,7 @@
 <div class="col-12 col-lg-9 border border-dark rounded p-3">
     <div class="container">
         <div class="row justify-content-center">
-            <h3><i class="fas fa-user-edit"></i>&nbsp &nbsp Pending Vendors Access Change</h3>
+            <h3><i class="fas fa-user-edit"></i>&nbsp &nbsp Active Customers Access Change</h3>
         </div>
         <hr class="mb-4">
         <div class="row align-items-start mb-2">
@@ -12,7 +12,7 @@
             <div class="col-10"> 
             </div>
         </div>
-        @if($Vendor)
+        @if($customer)
         <table class="table table-bordered table-hover">
             <thead class="thead-light">
                 <tr>
@@ -29,14 +29,14 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{$Vendor->id}}</td>
-                    <td>{{$Vendor->user_info->name}}</td>
-                    <td>{{$Vendor->email}}</td>
-                    <td>{{$Vendor->user_info->gender}}</td>
-                    <td>{{$Vendor->user_info->dob}}</td>
-                    <td>{{$Vendor->user_info->contact_no}}</td>
-                    <td>{{$Vendor->user_info->present_address}}</td>
-                    <td>{{$Vendor->user_info->permanent_address}}</td>
+                    <td>{{$customer->id}}</td>
+                    <td>{{$customer->user_info->name}}</td>
+                    <td>{{$customer->email}}</td>
+                    <td>{{$customer->user_info->gender}}</td>
+                    <td>{{$customer->user_info->dob}}</td>
+                    <td>{{$customer->user_info->contact_no}}</td>
+                    <td>{{$customer->user_info->present_address}}</td>
+                    <td>{{$customer->user_info->permanent_address}}</td>
                     <td><img src="#" alt="Potato" width="200" height="200"> </td>
                 </tr> 
             </tbody>
@@ -46,8 +46,7 @@
             <div class="row justify-content-center">
                 <form method="POST">
                     {{@csrf_field()}}
-                    <input type="submit" value="Accept" name="accept" class="btn btn-success">
-                    <input type="submit" value="Reject" name="delete"  class="btn btn-danger">
+                    <input type="submit" value="Block" name="block"  class="btn btn-danger">
                     @if(Session::get('msg1'))
                         <span class="text text-success">{{Session::get('msg1')}}<span>
                     @endif
