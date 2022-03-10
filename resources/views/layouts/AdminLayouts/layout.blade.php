@@ -14,7 +14,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-2">
             <div class="container">
-            <a href="{{route('admin.home')}}" class="navbar-brand">Ecommerce Platform</a>
+            <a href="{{route('admin.home')}}" class="navbar-brand text text-primary">Ecommerce Platform</a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -51,7 +51,7 @@
                         <div class="text-left mt-2 rounded">
                             <h4>Customers</h4>
                             <a href="{{route('admin.customer.pending')}}" class="btn btn-outline-dark btn-sm mb-2">Pending</a> 
-                            <a href="#" class="btn btn-outline-dark btn-sm mb-2">Active</a> 
+                            <a href="{{route('admin.customer.active')}}" class="btn btn-outline-dark btn-sm mb-2">Active</a> 
                             <a href="#" class="btn btn-outline-dark btn-sm mb-2">Blocked</a> 
                         </div>
                         <div class="text-left mt-2">
@@ -62,7 +62,7 @@
                         </div>
                         <div class="text-left mt-2">
                             <h4>Vendors</h4>
-                            <a href="#" class="btn btn-outline-dark btn-sm mb-2">Pending</a>
+                            <a href="{{route('admin.Vendor.pending')}}" class="btn btn-outline-dark btn-sm mb-2">Pending</a>
                             <a href="#" class="btn btn-outline-dark btn-sm mb-2">Active</a>
                             <a href="#" class="btn btn-outline-dark btn-sm mb-2">Blocked</a>
                         </div>
