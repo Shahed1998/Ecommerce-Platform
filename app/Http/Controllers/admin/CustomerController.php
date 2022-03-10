@@ -145,4 +145,60 @@ class CustomerController extends Controller
         }
         return view('Admin.CustomerActiveChangeAccess')->with('customer',$customer);
     }
+
+    //Customer Blocked
+    public function CustomerBlocked()
+    {
+        $customers=UserCredential::where('user_status',3)
+        ->where('user_role',1)->get();
+        return view('Admin.BlockedCustomers')->with('customers',$customers);
+    }
+
+    public function CustomerBlockedPost(Request $req)
+    {
+        $req->validate(
+            [
+                'searchCustomer'=>'required|regex:/^[0-9]+$/'
+            ],
+            [
+                'searchCustomer.required'=>'Id cannot be empty',
+                'searchCustomer.regex'=>'Id must be integer'
+            ]
+        );
+        return redirect()->route('admin.customer.blocked.changeAcssess',encrypt($req->searchCustomer));
+    }
+    public function CustomerBlockedChangeAccess(Request $req)
+    {
+        $id=decrypt($req->id);
+        $customer=UserCredential::where('user_status',3)
+        ->where('user_role',1)
+        ->where('id',$id)
+        ->first();
+        return view('Admin.CustomerBlockedChangeAccess')->with('customer',$customer);
+    }
+
+    public function CustomerBlockedChangeAccessPost(Request $req)
+    {
+        $id=decrypt($req->id);
+        $customer=UserCredential::where('user_status',3)
+        ->where('user_role',1)
+        ->where('id',$id)
+        ->first();
+        if($customer)
+        {
+            if(isset($req->active))
+            {
+                $customer->user_status=1;
+                $customer->save();
+                $str="Customer status changed to active with id ".$id;
+                $this->SaveHistory($str);
+                $req->session()->flash('msg1','Customer successfully being actived');
+            }
+        }
+        else
+        {
+            $req->session()->flash('msg2','Error in the operation');
+        }
+        return view('Admin.CustomerBlockedChangeAccess')->with('customer',$customer);
+    }
 }

@@ -25,6 +25,7 @@ class DeliveryStaffController extends Controller
         $history->save();
     }
 
+    //Pending
     public function DeliveryStaffPending()
     {
         $DeliveryStaffs=UserCredential::where('user_status',2)
@@ -86,5 +87,117 @@ class DeliveryStaffController extends Controller
             $req->session()->flash('msg2','Error in the operation');
         }
         return view('Admin.DeliveryStaffPendingChangeAccess')->with('DeliveryStaff',$DeliverySatff);
+    }
+
+    //Active
+    public function DeliveryStaffActive()
+    {
+        $DeliveryStaffs=UserCredential::where('user_status',1)
+        ->where('user_role',3)->get();
+        return view('Admin.ActiveDeliveryStaffs')->with('DeliveryStaffs',$DeliveryStaffs);
+    }
+
+    public function DeliveryStaffActivePost(Request $req)
+    {
+        $req->validate(
+            [
+                'searchDeliveryStaff'=>'required|regex:/^[0-9]+$/'
+            ],
+            [
+                'searchDeliveryStaff.required'=>'Id cannot be empty',
+                'searchDeliveryStaff.regex'=>'Id must be integer'
+            ]
+        );
+        return redirect()->route('admin.DeliveryStaff.active.changeAcssess',encrypt($req->searchDeliveryStaff));
+    }
+    public function DeliveryStaffActiveChangeAccess(Request $req)
+    {
+        $id=decrypt($req->id);
+        $DeliverySatff=UserCredential::where('user_status',1)
+        ->where('user_role',3)
+        ->where('id',$id)
+        ->first();
+        return view('Admin.DeliveryStaffActiveChangeAccess')->with('DeliveryStaff',$DeliverySatff);
+    }
+
+    public function DeliveryStaffActiveChangeAccessPost(Request $req)
+    {
+        $id=decrypt($req->id);
+        $DeliverySatff=UserCredential::where('user_status',1)
+        ->where('user_role',3)
+        ->where('id',$id)
+        ->first();
+        if($DeliverySatff)
+        {
+            if(isset($req->block))
+            {
+                $DeliverySatff->user_status=3;
+                $DeliverySatff->save();
+                $str="Delivery Staff blocked with id ".$id;
+                $this->SaveHistory($str);
+                $req->session()->flash('msg1','Delivery Staff successfully being blocked');
+            }
+        }
+        else
+        {
+            $req->session()->flash('msg2','Error in the operation');
+        }
+        return view('Admin.DeliveryStaffActiveChangeAccess')->with('DeliveryStaff',$DeliverySatff);
+    }
+
+    //Blocked
+    public function DeliveryStaffBlocked()
+    {
+        $DeliveryStaffs=UserCredential::where('user_status',3)
+        ->where('user_role',3)->get();
+        return view('Admin.BlockedDeliveryStaffs')->with('DeliveryStaffs',$DeliveryStaffs);
+    }
+
+    public function DeliveryStaffBlockedPost(Request $req)
+    {
+        $req->validate(
+            [
+                'searchDeliveryStaff'=>'required|regex:/^[0-9]+$/'
+            ],
+            [
+                'searchDeliveryStaff.required'=>'Id cannot be empty',
+                'searchDeliveryStaff.regex'=>'Id must be integer'
+            ]
+        );
+        return redirect()->route('admin.DeliveryStaff.blocked.changeAcssess',encrypt($req->searchDeliveryStaff));
+    }
+    public function DeliveryStaffBlockedChangeAccess(Request $req)
+    {
+        $id=decrypt($req->id);
+        $DeliverySatff=UserCredential::where('user_status',3)
+        ->where('user_role',3)
+        ->where('id',$id)
+        ->first();
+        return view('Admin.DeliveryStaffBlockedChangeAccess')->with('DeliveryStaff',$DeliverySatff);
+    }
+
+    public function DeliveryStaffBlockedChangeAccessPost(Request $req)
+    {
+        $id=decrypt($req->id);
+        $DeliverySatff=UserCredential::where('user_status',3)
+        ->where('user_role',3)
+        ->where('id',$id)
+        ->first();
+        if($DeliverySatff)
+        {
+            if(isset($req->active))
+            {
+                $DeliverySatff->user_status=1;
+                $DeliverySatff->save();
+                $str="Delivery Staff's status changed to active with id ".$id;
+                $this->SaveHistory($str);
+                $req->session()->flash('msg1','Delivery Staff successfully being activated');
+            }
+        }
+        else
+        {
+            $req->session()->flash('msg2','Error in the operation');
+        }
+        return view('Admin.DeliveryStaffBlockedChangeAccess')->with('DeliveryStaff',$DeliverySatff);
     }
 }
