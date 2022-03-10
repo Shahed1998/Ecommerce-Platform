@@ -33,7 +33,7 @@ class SessionChecker
             return redirect()->route('staffDashboard');
         }
         else if($user_role==4 && !$request->is('vendor/*'))
-        {
+        {   
             return redirect()->route('vendorDashboard');
         }
         return $next($request);
