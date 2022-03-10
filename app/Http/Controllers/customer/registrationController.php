@@ -4,8 +4,8 @@ namespace App\Http\Controllers\customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\UserCredential;
-use App\Models\UserInfo;
+use App\Models\Customer\UserCredential;
+use App\Models\Customer\UserInfo;
 
 class registrationController extends Controller
 {

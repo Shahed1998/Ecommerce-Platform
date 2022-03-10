@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Customer;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\UserInfo;
-use App\Models\UserStatus;
-use App\Models\UserRole;
+use App\Models\Customer\UserInfo;
+use App\Models\Customer\UserStatus;
+use App\Models\Customer\UserRole;
 
 class UserCredential extends Model
 {
