@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer\UserInfo;
 use App\Models\Customer\UserCredential;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Exception;
 
 class edit extends Controller
@@ -113,14 +114,20 @@ class edit extends Controller
                     "customer_image.max" => "Image must not be greater than 2 mb"
                 ]);
 
-                // Store user image in the server
-                $file = $req->file("customer_image");
-                $image_name = $file->hashName();
-                $image_path = $req->file("customer_image")->storeAs(
-                    'public/images', $image_name
-                );
+                $image_name = explode('/',UserInfo::where('uc_id', $user_id)->first()->image)[2];
 
-                UserInfo::where('uc_id', $user_id)->update(['image'=>"storage/images/".$image_name]);
+                // Deletes the existing image from the storage
+                // Then updates the latest image
+                if(Storage::exists("public/images/$image_name")){
+                    Storage::delete("public/images/$image_name");
+                    // Store user image in the server
+                    $file = $req->file("customer_image");
+                    $image_name = $file->hashName();
+                    $image_path = $req->file("customer_image")->storeAs(
+                    'public/images', $image_name
+                    );
+                    UserInfo::where('uc_id', $user_id)->update(['image'=>"storage/images/".$image_name]);
+                }
             }
 
             $req->session()->flash('update_status', true);
