@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin\UserCredential;
+use App\Models\Admin\User_Info;
 use Illuminate\Support\Facades\Hash;
 
 class Login extends Controller
@@ -49,6 +50,8 @@ class Login extends Controller
             $req->session()->put('email',$req->email);
             $req->session()->put('uc_id',$user->id);
             $req->session()->put('user_role',$user->user_role);
+            $u=User_Info::where('uc_id',$user->id)->first();
+            $req->session()->put('name',$u->name);
             return redirect()->route('admin.home');
         }
 
