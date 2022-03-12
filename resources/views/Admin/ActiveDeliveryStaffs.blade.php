@@ -52,7 +52,7 @@
                             <td>{{$c->user_info->contact_no}}</td>
                             <td>{{$c->user_info->present_address}}</td>
                             <td>{{$c->user_info->permanent_address}}</td>
-                            <td><img src="#" alt="Potato" width="200" height="200"> </td>
+                            <td><img src="{{asset($c->user_info->image)}}" alt="None" width="200" height="200"> </td>
                             <td>
                                 <a href="{{route('admin.DeliveryStaff.active.changeAcssess',['id'=> encrypt($c->id)])}}" class="btn btn-warning mb-2">Change Access</a>
                             </td>

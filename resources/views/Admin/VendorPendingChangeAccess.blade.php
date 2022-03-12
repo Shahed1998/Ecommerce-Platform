@@ -37,7 +37,7 @@
                     <td>{{$Vendor->user_info->contact_no}}</td>
                     <td>{{$Vendor->user_info->present_address}}</td>
                     <td>{{$Vendor->user_info->permanent_address}}</td>
-                    <td><img src="#" alt="Potato" width="200" height="200"> </td>
+                    <td><img src="{{asset($Vendor->user_info->image)}}" alt="None" width="200" height="200"> </td>
                 </tr> 
             </tbody>
         </table>
