@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-    <h2>Ecommerce Platform</h2>
+    <h2><a href="{{route('home')}}"  class="linkBtn gobackBtn">Ecommerce Platform</a><h2>
 </head>
 <body>
     <hr>

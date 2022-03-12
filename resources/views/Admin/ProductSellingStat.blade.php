@@ -32,12 +32,12 @@
       function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
-          ['Products', 'Selling'],
+          ['Products', 'Orders'],
           <?php echo $chartData; ?>
         ]);
 
         var options = {
-          title: 'Product Selling',
+          title: 'Product Orders',
           backgroundColor: 'transparent',
           is3D: true,
           legend : { position : 'bottom' }
