@@ -21,8 +21,8 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown mr-3">
-                    <a href="#" class="nav-link">
-                    <i class="fas fa-user"></i> &nbsp Mobarak
+                    <a href="{{route('admin.profileView')}}" class="nav-link">
+                    <i class="fas fa-user"></i> &nbsp {{Session::get('name')}}
                     </a>
                     <div class="dropdown-menu mt-2 ml-3 bg-light">
                     <a href="#" class="dropdown-item">
@@ -82,10 +82,16 @@
                 </div>
             </div>
         </main>
-        <center>
-        <div class="mt-5">
-            Copy Right &copy Ecommerce Platform 2022
-        </div>
-        </center>
+        <footer  class="bg-dark text-white mt-5 p-3">
+            <div class="container">
+            <div class="row">
+                <div class="col">
+                <p class="lead text-center">
+                    Copyright &copy Ecommerce Platform 2022
+                </p>
+                </div>
+            </div>
+            </div>
+        </footer>
     </body>
 </html>

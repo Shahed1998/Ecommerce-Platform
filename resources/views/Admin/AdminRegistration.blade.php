@@ -144,6 +144,16 @@
                         <td colspan='2' align='center'>
                         <input type="submit" value="&#10003; &nbsp Register" class="btn btn-success" style="width:400px">
                         </td>
+                        @if(Session::get('msg1'))
+                        <td>
+                            <span class="text text-success">{{Session::get('msg1')}}</span>
+                        </td>
+                        @endif
+                        @if(Session::get('msg'))
+                        <td>
+                            <span class="text text-danger">{{Session::get('msg')}}</span>
+                        </td>
+                        @endif
                     </tr>
                 </table>
             </form>
