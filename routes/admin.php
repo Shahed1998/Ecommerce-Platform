@@ -6,7 +6,7 @@ use App\Http\Controllers\admin\CustomerController;
 use App\Http\Controllers\admin\DeliveryStaffController;
 use App\Http\Controllers\admin\VendorController;
 use App\Http\Controllers\admin\ChartController;
-
+use App\Http\Controllers\admin\PDFController;
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -17,6 +17,9 @@ use App\Http\Controllers\admin\ChartController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('generate-pdf', [PDFController::class, 'generatePDFCustomer'])->name('admin.dwonloadActiveCustomer');
 
 // Admin routes
 Route::get('dashboard', [AdminController::class, 'home'])->name('admin.home');
