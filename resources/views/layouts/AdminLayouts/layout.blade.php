@@ -67,12 +67,18 @@
                             <a href="{{route('admin.Vendor.blocked')}}" class="btn btn-outline-dark btn-sm mb-2">Blocked</a>
                         </div>
                         <div class="text-left mt-2">
+                            <h4>Statistics</h4>
+                            <a href="{{route('admin.statistics.UserRatio')}}" class="btn btn-outline-dark btn-sm mb-2">User Statistics</a>
+                            <a href="{{route('admin.statistics.ProductSellingStat')}}" class="btn btn-outline-dark btn-sm mb-2">Product Selling</a>
+                        </div>
+                        <div class="text-left mt-2">
                             <h4>Others</h4>
                             <a href="#" class="btn btn-outline-dark btn-sm mb-2">Register an Admin</a> <br>
                             <a href="{{route('admin.activites')}}" class="btn btn-outline-dark btn-sm mb-2">Activities</a> <br>
                         </div>
                     </div>
                 @yield('content')
+                @yield('ChartScript')
                 </div>
             </div>
         </main>

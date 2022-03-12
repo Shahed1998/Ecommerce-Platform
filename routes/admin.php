@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CustomerController;
 use App\Http\Controllers\admin\DeliveryStaffController;
 use App\Http\Controllers\admin\VendorController;
+use App\Http\Controllers\admin\ChartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,3 +76,8 @@ Route::get('Vendor/blocked', [VendorController::class, 'VendorBlocked'])->name('
 Route::post('Vendor/blocked', [VendorController::class, 'VendorBlockedPost'])->name('admin.Vendor.blocked.Post');
 Route::get('Vendor/blocked/ChangeAccsess/{id?}', [VendorController::class, 'VendorBlockedChangeAccess'])->name('admin.Vendor.blocked.changeAcssess');
 Route::post('Vendor/blocked/ChangeAccsess/{id?}', [VendorController::class, 'VendorBlockedChangeAccessPost'])->name('admin.Vendor.blocked.changeAcssess.post');
+
+
+//Charts
+Route::get('statistics/UserRatio', [ChartController::class, 'UserRatio'])->name('admin.statistics.UserRatio');
+Route::get('statistics/ProductSelling', [ChartController::class, 'ProductSelling'])->name('admin.statistics.ProductSellingStat');
