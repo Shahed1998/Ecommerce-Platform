@@ -21,6 +21,8 @@ use App\Http\Controllers\admin\ChartController;
 // Admin routes
 Route::get('dashboard', [AdminController::class, 'home'])->name('admin.home');
 Route::get('activites', [AdminController::class, 'AdminActivities'])->name('admin.activites');
+Route::get('registration', [AdminController::class, 'AdminRegistration'])->name('admin.registration');
+Route::post('registration', [AdminController::class, 'AdminRegistrationPost'])->name('admin.registrationPost');
 
 //customer
 //pending
