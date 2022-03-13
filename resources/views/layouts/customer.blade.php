@@ -19,7 +19,7 @@
             <a href="{{route('home')}}"><i class="fa-solid fa-circle-left"></i> Home</a>
             <a href="{{route('customerDashboard')}}"><i class="fa-solid fa-circle-right"></i> View profile</a>
             <a href="{{route('customerEdit')}}"><i class="fa-solid fa-circle-right"></i> Edit/Delete profile</a>
-            <a href=""><i class="fa-solid fa-circle-right"></i> View shop</a>
+            <a href="{{route('customer.product.view')}}"><i class="fa-solid fa-circle-right"></i> View shop</a>
             <a href=""><i class="fa-solid fa-circle-right"></i> View cart</a>
             <a href=""><i class="fa-solid fa-circle-right"></i> View orders</a>
             <a href="{{route('logout')}}"><i class="fa-solid fa-circle-left"></i> Logout</a>
