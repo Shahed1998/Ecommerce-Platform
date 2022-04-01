@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer\UserInfo;
 use App\Models\Customer\UserCredential;
+use App\Models\Customer\AddToCart;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -35,6 +36,7 @@ class delete extends Controller
             $image_name = explode('/',UserInfo::where('uc_id', $user_id)->first()->image)[2];
             // Deletes the existing image from the storage
             if(UserInfo::where('uc_id', $user_id)->delete()){
+                AddToCart::where('c_id',$user_id)->delete();
                 Storage::delete("public/images/$image_name");
                 UserCredential::where('id', $user_id)->delete();
                 return redirect()->route('logout');
