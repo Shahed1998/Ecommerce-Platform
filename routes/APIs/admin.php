@@ -20,4 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get("/get",[admin_controller::class,'test']);
+Route::post('/AdminActivites',[admin_controller::class,'AdminActivities']);
+Route::post('/ViewProfile',[admin_controller::class,'ProfileView']);
 
