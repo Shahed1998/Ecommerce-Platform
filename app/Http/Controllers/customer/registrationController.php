@@ -22,7 +22,7 @@ class registrationController extends Controller
                 "contact"=>"required|min:2|max:15",
                 "present_address"=>"required",
                 "permanent_address"=>"required",
-                "customer_image"=>"required|mimes:jpg,png,jpeg,pdf|max:2048"
+                // "customer_image"=>"required|mimes:jpg,png,jpeg,pdf|max:2048"
             ]);
 
             if($validator->fails()){
@@ -33,9 +33,55 @@ class registrationController extends Controller
             }
 
             // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> To be continued
+            // Saves the data in the user_credentials table
+            $user_credentials = new UserCredential();
+            $user_credentials->email = $req->email;
+            $user_credentials->password = bcrypt($req->password);
+            $user_credentials->user_status = 2;
+            $user_credentials->user_role = $req->register_as;
+
+            if($user_credentials->save()){
+
+                $uc_id = $user_credentials->id;  
+
+                // Store user image in the server
+                // $file = $req->file("customer_image");
+                // $image_name = $file->hashName();
+                // $image_path = $req->file("customer_image")->storeAs(
+                //     'public/images', $image_name
+                // );
+
+                // Save the user info on the user_info table
+                $user_info = new UserInfo();
+                $user_info->name = $req->uname;
+                $user_info->gender = $req->gender;
+                $user_info->dob = $req->dob;
+                $user_info->country_code = $req->country_code;
+                $user_info->contact_no = $req->contact;
+                // $user_info->image = "storage/images/".$image_name;
+                $user_info->present_address = $req->present_address;
+                $user_info->permanent_address = $req->permanent_address;
+                $user_info->uc_id = $uc_id;
+                if($user_info->save()){
+                    return response()->json([
+                        "status"=>"success",
+                        "data"=>[
+                            "response"=>$req->all()
+                        ]],201
+                    );
+                }else{
+                    throw new \ErrorException("Unable to add data");
+                }
+            }else{
+                throw new \ErrorException("Unable to add data");
+            }
+
 
         }catch(\Exception $e){
-
+            return response()->json([
+                "status"=>"Failed",
+                "message"=>$e->getMessage()
+            ],400);
         }
         
     }
