@@ -10,24 +10,86 @@ use Illuminate\Support\Facades\Hash;
 
 class dashboardController extends Controller
 {
-    public function __construct(){
-        $this->middleware('sessionChecker');
+
+    // --------------------------------------- Final term
+    public function getDashboard($id){
+        try{
+
+            if(UserInfo::where('id', $id)->first()){
+
+                $customer_info = UserInfo::where('id', $id)
+                ->first()
+                ->makeHidden(['uc_id', 'id']);
+
+            }else{
+                throw new \ErrorException('Invalid id');
+            }
+            
+
+            $customer_credentials = UserInfo::where('id', $id)->first()
+            ->userCredential
+            ->makeHidden(['password']);
+
+            $customer_status = UserInfo::where('id', $id)
+            ->first()
+            ->userCredential
+            ->userStatus
+            ->status;
+
+            $customer_role = UserInfo::where('id', $id)
+            ->first()
+            ->userCredential
+            ->userRole
+            ->user_role;
+
+            $customer_info['email'] = $customer_credentials->email;
+            $customer_info['status'] = $customer_status;
+            $customer_info['role'] = $customer_role;
+
+            return response()->json([
+                'status'=>'Success',
+                'data'=>[
+                    'info'=>$customer_info,
+                ]
+            ]);
+
+        }catch(\Exception $e){
+            return response()->json([
+                'status'=>'Failed',
+                'message'=>$e->getMessage()
+            ]);
+        }
     }
+
+
+
+
+
+
+
+
+
+
+
+    // --------------------------------------- Mid term
+    // public function __construct(){
+    //     $this->middleware('sessionChecker');
+    // }
     
-    //customer dashboard get
-    public function getDashboard(Request $req){
-        $uc_id = $req->session()->get('uc_id');
+    // //customer dashboard get
+    // public function getDashboard(Request $req){
+    //     $uc_id = $req->session()->get('uc_id');
 
-        $user_info =  UserInfo::where('uc_id',$uc_id)->first();
+    //     $user_info =  UserInfo::where('uc_id',$uc_id)->first();
 
-        // return $info;
+    //     // return $info;
 
-        return view("customer.dashboard")->with('info', $user_info);
-    }
+    //     return view("customer.dashboard")->with('info', $user_info);
+    // }
 
-    public function getEdit(){
-        return view('customer.edit');
-    }
+    // public function getEdit(){
+    //     return view('customer.edit');
+    // }
 
     
 }
