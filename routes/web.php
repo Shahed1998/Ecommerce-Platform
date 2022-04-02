@@ -32,5 +32,3 @@ Route::get('/logout', [logout::class, 'logout'])->name('logout');
 // Registration
 Route::get('/registration', [registrationController::class, 'getRegister'])->name('register');
 Route::post('/registration', [registrationController::class, 'postRegister'])->middleware('XSSsanitizer');
-
-
