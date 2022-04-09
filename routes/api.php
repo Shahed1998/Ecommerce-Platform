@@ -22,7 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Sign up
 Route::post('/signup', [registrationController::class, 'signup'])->middleware('XSSsanitizer');
 
-
 // 404 page: not found
 // Custom fallback route
 Route::any('{any}', function(){

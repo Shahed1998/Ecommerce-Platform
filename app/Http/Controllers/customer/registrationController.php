@@ -13,12 +13,6 @@ class registrationController extends Controller
     // Sign up
     public function signup(Request $req){
         try{
-            // $file = $req->file("image");
-            // $image_name = $file->hashName();
-            // return response()->json([
-            //     'data'=>$req->all()
-            // ],200);
-
             $validator = Validator::make($req->all(),[
                 "name"=>"required|min:5",
                 "email"=>"required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",
