@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\customer\registrationController;
+use App\Http\Controllers\Admin_Api_Controllers\admin_controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,14 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Sign up
-Route::post('/signup', [registrationController::class, 'signup'])->middleware('XSSsanitizer');
+Route::get("/get",[admin_controller::class,'test']);
+Route::post('/AdminActivites',[admin_controller::class,'AdminActivities']);
+Route::post('/ViewProfile',[admin_controller::class,'ProfileView']);
 
-// 404 page: not found
-// Custom fallback route
-Route::any('{any}', function(){
-    return response()->json([
-        "status"=>"Failed",
-        "message"=>"Oops! page not found"
-    ], 404);
-})->where('any', '.*');

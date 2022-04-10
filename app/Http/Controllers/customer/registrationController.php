@@ -14,7 +14,7 @@ class registrationController extends Controller
     public function signup(Request $req){
         try{
             $validator = Validator::make($req->all(),[
-                "uname"=>"required|min:5",
+                "name"=>"required|min:5",
                 "email"=>"required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",
                 "password"=>"required|min:8",
                 "c_password"=>"required|required_with:password|same:password|min:8",
@@ -22,43 +22,40 @@ class registrationController extends Controller
                 "contact"=>"required|min:2|max:15",
                 "present_address"=>"required",
                 "permanent_address"=>"required",
-                // "customer_image"=>"required|mimes:jpg,png,jpeg,pdf|max:2048"
+                "customer_image"=>"required|mimes:jpg,png,jpeg,pdf|max:2048"
             ]);
 
             if($validator->fails()){
-                return response()->json([
-                    'status'=>'Failed',
-                    'message'=>'Unable to validate'
-                ]);
+                throw new \ErrorException("Unable to validate data");
             }
 
-            // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> To be continued
-            // Saves the data in the user_credentials table
+            // // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> To be continued
+            // // Saves the data in the user_credentials table
             $user_credentials = new UserCredential();
             $user_credentials->email = $req->email;
             $user_credentials->password = bcrypt($req->password);
             $user_credentials->user_status = 2;
-            $user_credentials->user_role = $req->register_as;
+            $user_credentials->user_role = $req->user_role * 1;
 
             if($user_credentials->save()){
 
                 $uc_id = $user_credentials->id;  
 
                 // Store user image in the server
-                // $file = $req->file("customer_image");
-                // $image_name = $file->hashName();
-                // $image_path = $req->file("customer_image")->storeAs(
-                //     'public/images', $image_name
-                // );
+                $file = $req->file("customer_image");
+                $image_name = $file->hashName();
+                $image_path = $req->file("customer_image")->storeAs(
+                    'public/images', $image_name
+                );
 
                 // Save the user info on the user_info table
                 $user_info = new UserInfo();
-                $user_info->name = $req->uname;
+                $user_info->name = $req->name;
                 $user_info->gender = $req->gender;
                 $user_info->dob = $req->dob;
                 $user_info->country_code = $req->country_code;
                 $user_info->contact_no = $req->contact;
-                // $user_info->image = "storage/images/".$image_name;
+                $user_info->image = "storage/images/".$image_name;
                 $user_info->present_address = $req->present_address;
                 $user_info->permanent_address = $req->permanent_address;
                 $user_info->uc_id = $uc_id;

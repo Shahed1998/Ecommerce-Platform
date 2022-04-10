@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\Hash;
 
 class dashboardController extends Controller
 {
-
     // --------------------------------------- Final term
-    public function getDashboard($id){
+    public function getDashboard(Request $req){
         try{
+            // $id = decrypt($req->id);
+            $id = $req->id;
+            if(UserInfo::where('uc_id', $id)->first()){
 
-            if(UserInfo::where('id', $id)->first()){
-
-                $customer_info = UserInfo::where('id', $id)
+                $customer_info = UserInfo::where('uc_id', $id)
                 ->first()
                 ->makeHidden(['uc_id', 'id']);
 
@@ -26,17 +26,17 @@ class dashboardController extends Controller
             }
             
 
-            $customer_credentials = UserInfo::where('id', $id)->first()
+            $customer_credentials = UserInfo::where('uc_id', $id)->first()
             ->userCredential
             ->makeHidden(['password']);
 
-            $customer_status = UserInfo::where('id', $id)
+            $customer_status = UserInfo::where('uc_id', $id)
             ->first()
             ->userCredential
             ->userStatus
             ->status;
 
-            $customer_role = UserInfo::where('id', $id)
+            $customer_role = UserInfo::where('uc_id', $id)
             ->first()
             ->userCredential
             ->userRole
