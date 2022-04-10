@@ -24,25 +24,7 @@ class admin_controller extends Controller
         $history->save();
     }
 
-    public function home()
-    {
-        $customers=UserCredential::where('user_status',2)
-        ->where('user_role',1)->get();
-
-        $dstaffs=UserCredential::where('user_status',2)
-        ->where('user_role',3)->get();
-
-        $vendors=UserCredential::where('user_status',2)
-        ->where('user_role',4)->get();
-
-        return view('admin.home')->with('c',count($customers))
-        ->with('s',count($dstaffs))
-        ->with('v',count($vendors))
-        ->with('t',count($customers)+count($dstaffs)+count($vendors));
-    }
-
     //Admin
-
     public function AdminActivities(Request $req)
     {
         $activites=UserCredential::where('id',$req->uc_id)
@@ -92,7 +74,8 @@ class admin_controller extends Controller
     
     public function AdminRegistrationPost(Request $req)
     {
-        $this->ValidateForm($req);
+        $f=$this->ValidateForm($req);
+        //return response()->json($f);
         
         $uc=new UserCredential();
         $uc->email = $req->email;
