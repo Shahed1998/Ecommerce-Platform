@@ -15,6 +15,7 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,
+        \Fruitcake\Cors\HandleCors::class,
         \App\Http\Middleware\TrustProxies::class,
         \Illuminate\Http\Middleware\HandleCors::class,
         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
@@ -60,7 +61,6 @@ class Kernel extends HttpKernel
         'authCustomer' => \App\Http\Middleware\CustomerSessionChecker::class,
         'authAdmin' => \App\Http\Middleware\AdminSessionChecker::class,
         'authStaff' => \App\Http\Middleware\StaffSessionChecker::class,
-        'cors' => \App\Http\Middleware\Cors::class,
         'authVendor' => \App\Http\Middleware\VendorSessionChecker::class,
         'XSSsanitizer' => \App\Http\Middleware\XSSsanitization::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
