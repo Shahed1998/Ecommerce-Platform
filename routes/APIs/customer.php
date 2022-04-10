@@ -3,8 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\customer\dashboardController;
-use App\Models\Customer\UserCredential;
-use App\Models\Customer\UserInfo;
+use App\Http\Controllers\customer\edit;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/dashboard/{id}', [dashboardController::class, 'getDashboard']);
+// Route::put('/info/update/{id}', [editController::class, 'updateInfo']); // Edit 
 
