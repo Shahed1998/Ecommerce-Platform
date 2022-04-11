@@ -25,7 +25,6 @@ class edit extends Controller
         // return "not so genius";
         try{
             // return $req->all();
-            return $req->customer_image;
             $validator = Validator::make($req->all(),[
                 "name"=>"required|min:5",
                 "email"=>"required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",
@@ -36,38 +35,35 @@ class edit extends Controller
                 "gender"=>"required",
                 "present_address"=>"required",
                 "permanent_address"=>"required",
-                "customer_image"=>"required|mimes:jpg,png,jpeg,pdf|max:2048"
+                // "customer_image"=>"required|mimes:jpg,png,jpeg,pdf|max:2048"
             ]);
 
             if($validator->fails()){
                 throw new \ErrorException("Unable to validate data");
             }
 
-            return 'Huh ?';
 
-             // // Saves the data in the user_credentials table
-            // if()
-            if(Hash::check($pass,
-             UserCredential::where('id', $req->id)->first()->password))
+            // Saves the data in the user_credentials table
+            $db_stored_pass = UserCredential::where('id', $req->id)->first()->password;
+            if(Hash::check($req->password, $db_stored_pass))
             {
-                return 'Genius';
                 UserCredential::where('id', $req->id)->update([
                     "email"=>$req->email, "password"=>bcrypt($req->password)
                 ]);
 
-                $image_name = explode('/',UserInfo::where('uc_id', $user_id)->first()->image)[2];
+                // $image_name = explode('/',UserInfo::where('uc_id', $user_id)->first()->image)[2];
                 // Deletes the existing image from the storage
                 // Then updates the latest image
-                if(Storage::exists("public/images/$image_name")){
-                    Storage::delete("public/images/$image_name");
-                    // Store user image in the server
-                    $file = $req->file("customer_image");
-                    $image_name = $file->hashName();
-                    $image_path = $req->file("customer_image")->storeAs(
-                        'public/images', $image_name
-                    );
-                    UserInfo::where('uc_id', $req->id)->update(['image'=>"storage/images/".$image_name]);
-                }
+                // if(Storage::exists("public/images/$image_name")){
+                //     Storage::delete("public/images/$image_name");
+                //     // Store user image in the server
+                //     $file = $req->file("customer_image");
+                //     $image_name = $file->hashName();
+                //     $image_path = $req->file("customer_image")->storeAs(
+                //         'public/images', $image_name
+                //     );
+                //     UserInfo::where('uc_id', $req->id)->update(['image'=>"storage/images/".$image_name]);
+                // }
 
                 UserInfo::where('uc_id', $req->id)->update([
                     "name"=>$req->name,
@@ -86,7 +82,7 @@ class edit extends Controller
 
             }
             
-            throw new \ErrorException("Err");
+            throw new \ErrorException("Unable to update profile");
 
         }catch(\Exception $e){
             return response()->json([

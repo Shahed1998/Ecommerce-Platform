@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Note: Signup is in api.php
 Route::post('/login', [login::class, 'postLogin']);
 Route::post('/dashboard', [dashboardController::class, 'getDashboard']);
-Route::post('/edit', [edit::class, 'updatePatch']);
+Route::put('/edit', [edit::class, 'updatePatch']);
 Route::delete('/delete', [delete::class, 'delete']);
 
 
