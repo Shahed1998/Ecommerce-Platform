@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer\UserInfo;
 use App\Models\Customer\UserCredential;
+use App\Models\Customer\AddToCart;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
