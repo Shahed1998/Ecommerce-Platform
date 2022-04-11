@@ -9,6 +9,8 @@ use App\Models\Customer\UserCredential;
 use App\Models\Customer\AddToCart;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Customer\ProductModel;
+use App\Models\Customer\Feedback;
 
 class delete extends Controller
 {
@@ -39,7 +41,9 @@ class delete extends Controller
                 //     throw new \ErrorException("Image not deleted");
                 // }
                 // Storage::delete("public/images/$image_name");
-
+                
+                Feedback::where('c_id', $user_id)->delete();
+                AddToCart::where('c_id', $user_id)->delete();
                 UserInfo::where('uc_id', $user_id)->delete();
                 UserCredential::where('id', $user_id)->delete();
 
