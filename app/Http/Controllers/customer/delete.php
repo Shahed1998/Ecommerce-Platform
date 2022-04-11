@@ -33,15 +33,20 @@ class delete extends Controller
             $user_id = UserCredential::where('id', $user_id)->first()->id;
 
             if( $user_id && Hash::check($user_password, $stored_pass) ){
-                $image_name = explode('/',UserInfo::where('uc_id', $user_id)->first()->image)[2];
+                // $image_name = explode('/',UserInfo::where('uc_id', $user_id)->first()->image)[2];
                 // return $image_name;
-                if(!Storage::delete("/images/$image_name")){
-                    throw new \ErrorException("Image not deleted");
-                }
+                // if(!Storage::delete("/images/$image_name")){
+                //     throw new \ErrorException("Image not deleted");
+                // }
+                // Storage::delete("public/images/$image_name");
 
                 UserInfo::where('uc_id', $user_id)->delete();
-                Storage::delete("public/images/$image_name");
                 UserCredential::where('id', $user_id)->delete();
+
+                return response()->json([
+                    "status"=>"success",
+                    "message"=>"successfully deleted user"
+                ], 204);
 
             }else{
                 throw new \ErrorException("Details not matched");
