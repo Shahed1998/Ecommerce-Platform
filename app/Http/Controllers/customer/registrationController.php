@@ -13,20 +13,22 @@ class registrationController extends Controller
     // Sign up
     public function signup(Request $req){
         try{
+            // return $req->user_role;
             $validator = Validator::make($req->all(),[
                 "name"=>"required|min:5",
                 "email"=>"required|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",
                 "password"=>"required|min:8",
                 "c_password"=>"required|required_with:password|same:password|min:8",
                 "gender"=>"required",
+                "dob"=>"required",
                 "contact"=>"required|min:2|max:15",
                 "present_address"=>"required",
                 "permanent_address"=>"required",
-                "customer_image"=>"required|mimes:jpg,png,jpeg,pdf|max:2048"
+                // "customer_image"=>"required|mimes:jpg,png,jpeg,pdf|max:2048"
             ]);
 
             if($validator->fails()){
-                throw new \ErrorException("Unable to validate data");
+                throw new \ErrorException("Validation failed");
             }
 
             // // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> To be continued
@@ -41,12 +43,12 @@ class registrationController extends Controller
 
                 $uc_id = $user_credentials->id;  
 
-                // Store user image in the server
-                $file = $req->file("customer_image");
-                $image_name = $file->hashName();
-                $image_path = $req->file("customer_image")->storeAs(
-                    'public/images', $image_name
-                );
+                // // Store user image in the server
+                // $file = $req->file("customer_image");
+                // $image_name = $file->hashName();
+                // $image_path = $req->file("customer_image")->storeAs(
+                //     'public/images', $image_name
+                // );
 
                 // Save the user info on the user_info table
                 $user_info = new UserInfo();
@@ -55,7 +57,7 @@ class registrationController extends Controller
                 $user_info->dob = $req->dob;
                 $user_info->country_code = $req->country_code;
                 $user_info->contact_no = $req->contact;
-                $user_info->image = "storage/images/".$image_name;
+                // $user_info->image = "storage/images/".$image_name;
                 $user_info->present_address = $req->present_address;
                 $user_info->permanent_address = $req->permanent_address;
                 $user_info->uc_id = $uc_id;

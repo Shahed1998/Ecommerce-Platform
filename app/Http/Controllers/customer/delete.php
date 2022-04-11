@@ -12,36 +12,71 @@ use Illuminate\Support\Facades\Storage;
 class delete extends Controller
 {
     //
-    public function __construct(){
-        $this->middleware('sessionChecker');
-    }
+    // public function __construct(){
+    //     $this->middleware('sessionChecker');
+    // }
 
-    public function getDelete(){
-        return view('customer.delete');
-    }
+    // public function getDelete(){
+    //     return view('customer.delete');
+    // }
 
     public function delete(Request $req){
-        $this->validate($req, [
-            "password"=>"required",
-        ],[
-            "password.required"=>"Password is required",
-        ]);
+        
+        // ------------------------------- Final Term
+        try{
 
-        $user_id = $req->session()->get('uc_id');
+            $user_id = $req->id;
+            $user_password = $req->password;
 
-        $stored_pass = UserCredential::where('id',$user_id)->first()->password;
+            $stored_pass = UserCredential::where('id', $user_id)->first()->password;
+            $user_id = UserCredential::where('id', $user_id)->first()->id;
 
-        if(Hash::check($req->password, $stored_pass)){
-            $image_name = explode('/',UserInfo::where('uc_id', $user_id)->first()->image)[2];
-            // Deletes the existing image from the storage
-            if(UserInfo::where('uc_id', $user_id)->delete()){
+            if( $user_id && Hash::check($user_password, $stored_pass) ){
+                $image_name = explode('/',UserInfo::where('uc_id', $user_id)->first()->image)[2];
+                // return $image_name;
+                if(!Storage::delete("/images/$image_name")){
+                    throw new \ErrorException("Image not deleted");
+                }
+
+                UserInfo::where('uc_id', $user_id)->delete();
                 Storage::delete("public/images/$image_name");
                 UserCredential::where('id', $user_id)->delete();
-                return redirect()->route('logout');
+
+            }else{
+                throw new \ErrorException("Details not matched");
             }
-        }else {
-            $req->session()->flash('invalid', 'Password is invalid');
-            return back();
+
+        }catch(\Exception $err){
+            return response()->json([
+                "status"=>"Failed",
+                "message"=>$err->getMessage()
+            ], 404);
         }
+        
+        
+        
+        // ------------------------------- Mid Term
+        // $this->validate($req, [
+        //     "password"=>"required",
+        // ],[
+        //     "password.required"=>"Password is required",
+        // ]);
+
+        // $user_id = $req->session()->get('uc_id');
+
+        // $stored_pass = UserCredential::where('id',$user_id)->first()->password;
+
+        // if(Hash::check($req->password, $stored_pass)){
+        //     $image_name = explode('/',UserInfo::where('uc_id', $user_id)->first()->image)[2];
+        //     // Deletes the existing image from the storage
+        //     if(UserInfo::where('uc_id', $user_id)->delete()){
+        //         Storage::delete("public/images/$image_name");
+        //         UserCredential::where('id', $user_id)->delete();
+        //         return redirect()->route('logout');
+        //     }
+        // }else {
+        //     $req->session()->flash('invalid', 'Password is invalid');
+        //     return back();
+        // }
     }
 }
