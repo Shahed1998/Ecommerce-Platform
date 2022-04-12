@@ -25,6 +25,36 @@ class admin_controller extends Controller
         ->first();
         return response()->json($activites->Histories);
     }
+    public function ClearHistory(Request $req)
+    {
+        try
+        {
+            return response()->json([
+                "status"=>"Ok",
+                "message"=>"yeah"
+            ],200);
+            $a=UserCredential::where('user_role',2)->where('id',$req->admin_id)->first();
+            if(!$a)
+            {
+                throw new \ErrorException("Invalid admin!");
+            }
+            if(AdminHistory::where('admin_id',$req->admin_id)->delete())
+            {
+                return response()->json([
+                    "status"=>"Ok",
+                    "message"=>"History Successfully cleared"
+                ],200);
+            }
+            throw new \ErrorException("Something went wrong!");
+        }
+        catch(\Exception $e)
+        {
+            return response()->json([
+                "status"=>"Failed",
+                "message"=>$e->getMessage()
+            ],400);
+        }
+    }
     
     public function AdminRegistrationPost(Request $req)
     {
@@ -50,7 +80,7 @@ class admin_controller extends Controller
         $uc->user_role = 2;
         if(!$uc->save())
         {
-            return response()->json(["msg"=>"Error is registration please try again later!"]);
+            return response()->json(["msg"=>"Error in registration please try again later!"]);
         }
         
         $uinfo=new User_Info();
@@ -64,7 +94,7 @@ class admin_controller extends Controller
 
         if(!$uinfo->save())
         {
-            return response()->json(["msg"=>"Error is registration please try again later!"]);
+            return response()->json(["msg"=>"Error in registration please try again later!"]);
         }
         return response()->json(["msg"=>"Admin successfully registered"]);
     }
@@ -87,11 +117,9 @@ class admin_controller extends Controller
             "Praddress"=>"required|max:100",
             "Peaddress"=>"required|max:100",
         ]);
-
         if($check->fails()){
             return response()->json($check->errors());
         }
-        
         $uc=UserCredential::where('id',$req->uc_id)->first();
         $uc->password = bcrypt($req->password);
         if(!$uc->save())
