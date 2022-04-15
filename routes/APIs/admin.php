@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //admin
 Route::get("/get",[admin_controller::class,'test']);
+Route::post('login',[admin_controller::class,'Login']);
 Route::post('/ViewProfile',[admin_controller::class,'ProfileView']);
 Route::post('/admin/register',[admin_controller::class,'AdminRegistrationPost']);
 Route::post('/activities',[admin_controller::class,'AdminActivities']);
