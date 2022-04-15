@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\DeliveryStaffController;
 use App\Http\Controllers\admin\VendorController;
 use App\Http\Controllers\admin\ChartController;
 use App\Http\Controllers\admin\PDFController;
+use App\Http\Controllers\Admin_Api_Controllers\MailController;
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -18,6 +19,7 @@ use App\Http\Controllers\admin\PDFController;
 |
 */
 
+Route::get('mail',[MailController::class,'MailSend']);
 
 Route::get('generate-pdf', [PDFController::class, 'generatePDFCustomer'])->name('admin.dwonloadActiveCustomer');
 
