@@ -7,8 +7,10 @@ use App\Http\Controllers\customer\login;
 use App\Http\Controllers\customer\edit;
 use App\Http\Controllers\customer\delete;
 use App\Http\Controllers\customer\product;
+use App\Http\Controllers\customer\Help;
 use App\Models\Customer\UserCredential;
 use App\Models\Customer\UserInfo;
+
 
 
 /*
@@ -37,6 +39,9 @@ Route::delete('/delete', [delete::class, 'delete']);
 Route::get('/product/all', [product::class, 'getProduct']);
 Route::post('/addToCart', [product::class, 'addToCart']);
 Route::delete('/deleteFromCart', [product::class, 'deleteFromCart']);
+
+// Customer help
+Route::get('/help/{id}', [Help::class, 'getEmail']);
 
 // Feedback entity
 Route::get("/product/feedback/{review_id}", [product::class, 'viewProdReview']);
